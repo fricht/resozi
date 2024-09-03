@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .svg-container {
+        background-color: gray;
+        position: fixed;
+        pointer-events: none;
+    }
+    </style>
+    <title>Welcome !</title>
+</head>
+
+<body>
+<div class="svg-container"  id="svg1"><svg class="svg-layer" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" stroke="black" stroke-width="3" fill="red" /></svg></div>
+<button id="next-btn">
+    Next
+</button>
+
+<script>
+let current_slide = 0;
+let slides = JSON.parse(`{"slides":[{"name":"Hello World!","notes":"Nothing to say here","items":[{"id":"svg1","transition":"0.5s ease-in-out","opacity":1.0,"position":[0.0,0.0],"rotation":0.0,"scale":10.0}]},{"name":"Slide 2","notes":"Nothing to say here, again","items":[{"id":"svg1","transition":"1s ease-in-out","opacity":0.8,"position":[-50.0,-50.0],"rotation":0.0,"scale":50.0}]}]}`);
+function apply_to_elem(elem) {
+  let html_elem = document.getElementById(elem.id);
+  html_elem.style.transition = elem.transition;
+  html_elem.style.opacity = elem.opacity;
+  html_elem.style.left = "calc(50vw + " + elem.position[0] + "vmin)";
+  html_elem.style.top = "calc(50vh + " + elem.position[1] + "vmin)";
+  html_elem.style.rotation = elem.rotation;
+  html_elem.querySelectorAll("svg").forEach((svg) => {
+    svg.style.transition = elem.transition;
+    svg.style.width = elem.scale + "vmin";
+    svg.style.height = elem.scale + "vmin";
+  });
+}
+function exec_slide() {
+  let slide = slides.slides[current_slide];
+  console.log("doing '" + slide.name + "'\nnotes : " + slide.notes);
+  for (i of slide.items) {
+    apply_to_elem(i);
+  }
+}
+document.getElementById("next-btn").addEventListener("click", () => {
+  current_slide = (current_slide + 1) % slides.slides.length;
+  exec_slide();
+});
+exec_slide();
+</script>
+</body>
+
+</html>

@@ -19,54 +19,14 @@
 </head>
 
 <body>
-
-
-<div class="svg-container"  id="svg1">
-    <svg class="svg-layer" width="80vw" height="60vh" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="45" stroke="black" stroke-width="3" fill="red" />
-    </svg>
-</div>
-
-
+¿
 <button id="next-btn">
     Next
 </button>
 
 <script>
 let current_slide = 0;
-let slides = JSON.parse(`{
-  "slides": [
-    {
-      "name": "Title",
-      "notes": "Present the project.",
-      "items": [
-        {
-          "id": "svg1",
-          "transition": "all 0.5s ease-in-out",
-          "opacity": 1,
-          "position": [0, 0],
-          "rotation": 0,
-          "scale": 10
-        }
-      ]
-    },
-    {
-      "name": "slide 1",
-      "notes": "...",
-      "items": [
-        {
-          "id": "svg1",
-          "transition": "all 0.5s ease-in-out",
-          "opacity": 0.2,
-          "position": [-50, -50],
-          "rotation": 0,
-          "scale": 100
-        }
-      ]
-    }
-  ]
-}
-`);
+let slides = JSON.parse(`¿`);
 function apply_to_elem(elem) {
   let html_elem = document.getElementById(elem.id);
   html_elem.style.transition = elem.transition;
